@@ -1,0 +1,55 @@
+---
+import Container from "../Container.astro";
+import CustomButton from "../ui/CustomButton.astro";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<section class:list={["relative overflow-x-hidden", className]}>
+	<!-- === ДЕКОРАТИВНЫЙ ЗАДНИЙ ФОН === -->
+	<div
+		class="absolute top-0 left-0 right-0 bottom-0 pointer-events-none -z-10 select-none">
+		<div
+			class="absolute top-[-10%] left-[-20%] w-72 h-72 bg-accent/15 rounded-full blur-[80px]">
+		</div>
+
+		<div
+			class="absolute bottom-[10%] right-[-30%] w-80 h-80 bg-purple-600/10 rounded-full blur-[100px]">
+		</div>
+
+		<div
+			class="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]">
+		</div>
+	</div>
+	<!-- ================================== -->
+
+	<Container class="text-center h-screen flex flex-col justify-center">
+		<div
+			class="text-accent bg-accent/20 backdrop-blur-sm inline-flex mx-auto items-center rounded-full px-4 py-2 text-xs border-accent/20 border gap-2.5 mb-6">
+			<i class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></i>
+			Открыт для проектов
+		</div>
+		<h1 class="font-black text-2xl mb-4">
+			Создание <span class="text-accent">приложений</span> и&nbsp;<span
+				class="text-accent">веб-сайтов</span
+			><span class="hidden md:inline">: от&nbsp;идеи до&nbsp;чистого кода</span>
+		</h1>
+		<p class="text-sm text-muted-text leading-relaxed mb-8">
+			Привет, я <span class="text-text">Артем</span>, Fullstack-инженер.
+			Специализируюсь на&nbsp;кроссплатформенных приложениях на&nbsp;<span
+				class="text-text">React Native</span
+			> и веб-системах. Пишу фронтенд на&nbsp;<span class="text-text"
+				>Next.js</span
+			> и&nbsp;бэкенд на&nbsp;<span class="text-text">Nest.js</span>.
+		</p>
+
+		<div class="flex flex-col justify-center items-center gap-3">
+			<CustomButton variant="primary">Смотреть проекты</CustomButton>
+			<CustomButton>Написать мне</CustomButton>
+		</div>
+	</Container>
+</section>
