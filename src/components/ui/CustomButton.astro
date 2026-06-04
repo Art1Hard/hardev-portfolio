@@ -1,0 +1,23 @@
+---
+interface Props {
+	class?: string;
+	variant?: "primary" | "secondary";
+}
+
+const { class: className, variant = "secondary" } = Astro.props;
+
+const variants = {
+	primary: "bg-accent",
+	secondary:
+		"bg-zinc-900/40 backdrop-blur-sm border border-zinc-800/80 text-text hover:bg-zinc-800/50",
+};
+---
+
+<button
+	class:list={[
+		"py-3 px-5 w-full rounded-xl font-bold transition-all duration-200 text-center flex items-center justify-center gap-2",
+		variants[variant],
+		className,
+	]}>
+	<slot />
+</button>

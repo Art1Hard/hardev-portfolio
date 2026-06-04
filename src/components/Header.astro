@@ -1,0 +1,28 @@
+---
+import Container from "./Container.astro";
+---
+
+<header class="fixed top-0 left-0 right-0 z-50">
+	<Container>
+		<div
+			class="flex justify-between items-center py-3 px-4 rounded-full my-3 bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/50 shadow-lg shadow-black/10">
+			<a href="#" class="font-bold text-lg"
+				>Har<span class="text-accent">dev</span></a
+			>
+
+			<button
+				id="menu-toggle"
+				class="flex flex-col justify-center items-center w-8 h-8 gap-1.5 md:hidden z-50 relative group"
+				aria-label="Открыть меню">
+				<span
+					class="w-6 h-0.5 bg-text transition-all duration-300 origin-center id-line-1"
+				></span>
+				<span class="w-6 h-0.5 bg-text transition-all duration-300 id-line-2"
+				></span>
+				<span
+					class="w-6 h-0.5 bg-text transition-all duration-300 origin-center id-line-3"
+				></span>
+			</button>
+		</div>
+	</Container>
+</header>

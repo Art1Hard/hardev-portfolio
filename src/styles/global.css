@@ -1,1 +1,64 @@
 @import "tailwindcss";
+
+@font-face {
+	font-family: "Geist Sans";
+	src: url("/fonts/Geist-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Geist Sans";
+	src: url("/fonts/Geist-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Geist Sans";
+	src: url("/fonts/Geist-Black.woff2") format("woff2");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "JetBrains Mono";
+	src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "JetBrains Mono";
+	src: url("/fonts/JetBrainsMono-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@theme {
+	--font-sans: "Geist Sans", system-ui, -apple-system, sans-serif;
+	--font-mono: "JetBrains Mono", monospace;
+
+	--color-background: #09090b;
+
+	/* Добавляем свой оранжевый (например, чуть измененный твой любимый) */
+	--color-text: #f0f0f2;
+	--color-muted-text: #9f9fa9;
+	--color-accent: #f97316;
+
+	/* Можно также добавлять свои шрифты, анимации и т.д. */
+	--font-display: "JetBrains Mono", monospace;
+}
+
+@layer base {
+	body {
+		background-color: var(--color-background);
+		color: var(--color-text);
+	}
+
+	button {
+		cursor: pointer;
+	}
+}
