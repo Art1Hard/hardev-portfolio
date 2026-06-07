@@ -1,52 +1,67 @@
 ---
+interface Props {
+	class: string;
+}
+
+const { class: className } = Astro.props;
+
 const techStack = [
-	"React Native",
-	"Next.js",
-	"Nest.js",
+	"HTML CSS JS",
 	"React",
+	"Next.js",
+	"TanStack Query",
+	"Zustand",
 	"TypeScript",
+	"React Native",
+	"Nest.js",
 	"Node.js",
+	"SASS",
 	"Tailwind CSS",
-	"Astro",
+	"Vite",
+	"Wordpress",
+	"PHP",
+	"SQL",
 	"PostgreSQL",
+	"Astro",
 	"Docker",
+	"Git",
+	"API",
 ];
+
+const items = [0, 1];
 ---
 
 <div
-	class="relative w-full overflow-hidden bg-zinc-900/30 border-y border-zinc-800/50 py-3 my-8 backdrop-blur-sm flex">
-	<!-- Размытые края -->
+	class:list={[
+		"relative w-full overflow-hidden bg-zinc-900/30 border-y border-zinc-800/50 py-3 backdrop-blur-sm flex gap-8",
+		className,
+	]}
+	role="region"
+	aria-label="Технологический стек">
 	<div
-		class="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none">
+		class="absolute inset-y-0 left-0 w-12 bg-linear-to-r from-zinc-950 to-transparent z-10 pointer-events-none">
 	</div>
 	<div
-		class="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none">
-	</div>
-
-	<!-- Главный трюк: ДВЕ абсолютно одинаковые ленты, которые движутся синхронно -->
-	<!-- pr-8 (отступ справа) должен быть равен gap-8, чтобы расстояние на стыке двух лент не ломалось -->
-	<div
-		class="flex items-center gap-8 animate-marquee whitespace-nowrap pr-8 shrink-0 select-none">
-		{
-			techStack.map((tech) => (
-				<div class="flex items-center gap-3 text-sm font-mono font-medium text-zinc-400">
-					<span>{tech}</span>
-					<span class="w-1.5 h-1.5 rounded-full bg-hardev-orange/60" />
-				</div>
-			))
-		}
+		class="absolute inset-y-0 right-0 w-12 bg-linear-to-l from-zinc-950 to-transparent z-10 pointer-events-none">
 	</div>
 
-	<!-- Копия первой ленты -->
 	<div
-		class="flex items-center gap-8 animate-marquee whitespace-nowrap pr-8 shrink-0 select-none"
-		aria-hidden="true">
+		class="flex items-center gap-8 animate-marquee whitespace-nowrap select-none">
 		{
-			techStack.map((tech) => (
-				<div class="flex items-center gap-3 text-sm font-mono font-medium text-zinc-400">
-					<span>{tech}</span>
-					<span class="w-1.5 h-1.5 rounded-full bg-hardev-orange/60" />
-				</div>
+			items.map((item) => (
+				<ul
+					class="flex items-center gap-8"
+					aria-hidden={!item ? undefined : "true"}>
+					{techStack.map((tech) => (
+						<li class="flex items-center gap-3 text-sm font-mono font-medium text-text/40">
+							<span
+								class="w-1.5 h-1.5 rounded-full bg-accent/60"
+								aria-hidden={!item ? "true" : undefined}
+							/>
+							<span>{tech}</span>
+						</li>
+					))}
+				</ul>
 			))
 		}
 	</div>

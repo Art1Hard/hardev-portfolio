@@ -43,13 +43,11 @@
 
 	--color-background: #09090b;
 
-	/* Добавляем свой оранжевый (например, чуть измененный твой любимый) */
 	--color-text: #f0f0f2;
 	--color-muted-text: #9f9fa9;
 	--color-accent: #f97316;
 
-	/* Можно также добавлять свои шрифты, анимации и т.д. */
-	--font-display: "JetBrains Mono", monospace;
+	--marquee-duration: 40s;
 }
 
 @layer base {
@@ -63,16 +61,24 @@
 	}
 }
 
-/* Создаем утилиту для анимации бесконечного скролла */
 @utility animate-marquee {
-	animation: marquee 25s linear infinite;
+	animation: marquee var(--marquee-duration) linear infinite;
 }
 
 @keyframes marquee {
-	0% {
-		transform: translateX(0%);
-	}
-	100% {
+	to {
 		transform: translateX(-50%);
+	}
+}
+
+@media (max-width: 768px) {
+	:root {
+		--marquee-duration: 40s;
+	}
+}
+
+@media (max-width: 480px) {
+	:root {
+		--marquee-duration: 40s;
 	}
 }

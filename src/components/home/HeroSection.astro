@@ -22,12 +22,13 @@ const { class: className } = Astro.props;
 		</div>
 
 		<div
-			class="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]">
+			class="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-size-[24px_24px]">
 		</div>
 	</div>
 	<!-- ================================== -->
 
-	<Container class="text-center h-screen flex flex-col justify-center">
+	<Container
+		class="text-center h-screen [@media(max-height:530px)]:h-fit [@media(max-height:530px)]:pt-22 flex flex-col justify-center">
 		<div
 			class="text-accent bg-accent/20 backdrop-blur-sm inline-flex mx-auto items-center rounded-full px-4 py-2 text-xs border-accent/20 border gap-2.5 mb-6">
 			<i class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></i>
