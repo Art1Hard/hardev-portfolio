@@ -5,24 +5,102 @@ import Container from "./Container.astro";
 <header class="fixed top-0 left-0 right-0 z-50">
 	<Container>
 		<div
-			class="flex justify-between items-center py-3 px-4 rounded-full my-3 bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/50 shadow-lg shadow-black/10">
-			<a href="#" class="font-bold text-lg"
-				>Har<span class="text-accent">dev</span></a
-			>
+			id="inner-container"
+			class="px-4 rounded-4xl my-3 bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/50 shadow-lg shadow-black/10 transition-all duration-300 overflow-hidden">
+			<!-- Верхняя строка: лого + бургер -->
+			<div class="flex justify-between items-center py-3">
+				<a href="#" class="font-bold text-lg">
+					Har<span class="text-accent">dev</span>
+				</a>
+				<button
+					id="menu-toggle"
+					class="flex flex-col justify-center items-center w-8 h-8 gap-1.5 md:hidden z-50 relative"
+					aria-label="Открыть меню"
+					aria-expanded="false">
+					<span
+						class="w-6 h-0.5 bg-text transition-all duration-300 origin-center"
+						id="line-1"></span>
+					<span
+						class="w-6 h-0.5 bg-text transition-all duration-300"
+						id="line-2"></span>
+					<span
+						class="w-6 h-0.5 bg-text transition-all duration-300 origin-center"
+						id="line-3"></span>
+				</button>
+			</div>
 
-			<button
-				id="menu-toggle"
-				class="flex flex-col justify-center items-center w-8 h-8 gap-1.5 md:hidden z-50 relative group"
-				aria-label="Открыть меню">
-				<span
-					class="w-6 h-0.5 bg-text transition-all duration-300 origin-center id-line-1"
-				></span>
-				<span class="w-6 h-0.5 bg-text transition-all duration-300 id-line-2"
-				></span>
-				<span
-					class="w-6 h-0.5 bg-text transition-all duration-300 origin-center id-line-3"
-				></span>
-			</button>
+			<!-- Меню: анимируется через grid-rows -->
+			<nav
+				id="menu"
+				class="grid transition-all duration-300 ease-in-out"
+				style="grid-template-rows: 0fr;"
+				aria-label="Основное меню">
+				<div class="overflow-y-auto max-h-[70vh]">
+					<ul class="space-y-2.5 text-center pb-4">
+						<li>
+							<a href="/" class="block py-1 hover:text-accent transition-colors"
+								>Обо мне</a
+							>
+						</li>
+						<li>
+							<a
+								href="/about"
+								class="block py-1 hover:text-accent transition-colors">Навыки</a
+							>
+						</li>
+						<li>
+							<a
+								href="/contacts"
+								class="block py-1 hover:text-accent transition-colors">Путь</a
+							>
+						</li>
+						<li>
+							<a href="/" class="block py-1 hover:text-accent transition-colors"
+								>Проекты</a
+							>
+						</li>
+						<li>
+							<a
+								href="/about"
+								class="block py-1 hover:text-accent transition-colors"
+								>Связаться</a
+							>
+						</li>
+					</ul>
+				</div>
+			</nav>
 		</div>
 	</Container>
 </header>
+
+<script>
+	const menuToggle = document.getElementById("menu-toggle");
+	const menu = document.getElementById("menu") as HTMLElement;
+	const line1 = document.getElementById("line-1") as HTMLElement;
+	const line2 = document.getElementById("line-2") as HTMLElement;
+	const line3 = document.getElementById("line-3") as HTMLElement;
+
+	let isOpen = false;
+
+	menuToggle?.addEventListener("click", () => {
+		isOpen = !isOpen;
+
+		// Анимация меню через grid-template-rows
+		menu.style.gridTemplateRows = isOpen ? "1fr" : "0fr";
+
+		// Скругление контейнера
+
+		// Бургер → крестик
+		if (isOpen) {
+			line1.style.transform = "translateY(8px) rotate(45deg)";
+			line2.style.opacity = "0";
+			line3.style.transform = "translateY(-8px) rotate(-45deg)";
+		} else {
+			line1.style.transform = "";
+			line2.style.opacity = "";
+			line3.style.transform = "";
+		}
+
+		menuToggle.setAttribute("aria-expanded", String(isOpen));
+	});
+</script>
