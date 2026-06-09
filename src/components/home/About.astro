@@ -1,0 +1,58 @@
+---
+import Container from "../Container.astro";
+import CustomH2 from "../ui/CustomH2.astro";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const advantages: { title: string; text: string }[] = [
+	{
+		title: "Инструменты под задачу, а&nbsp;не&nbsp;ради&nbsp;хайпа",
+		text: "С&nbsp;одинаковым удовольствием соберу легкий лендинг на&nbsp;Astro без&nbsp;лишнего JS-сетапа или&nbsp;разверну сложное SPA на&nbsp;Next.js с&nbsp;гибким стейт-менеджментом.",
+	},
+
+	{
+		title: "Mobile-First — это&nbsp;база",
+		text: "Больше половины пользователей смотрят сайты со&nbsp;смартфонов. Мой код изначально пишется так, чтобы интерфейс летал на&nbsp;мобилках.",
+	},
+
+	{
+		title: "Чистая архитектура на&nbsp;бэкенде",
+		text: "Проектирую API на&nbsp;Nest.js так, чтобы код оставался поддерживаемым и&nbsp;тестируемым, а&nbsp;PostgreSQL не&nbsp;задыхался от&nbsp;неоптимизированных запросов.",
+	},
+];
+---
+
+<section class:list={["relative overflow-x-hidden", className]}>
+	<Container>
+		<CustomH2 class="mb-8">Обо мне</CustomH2>
+
+		<div
+			class="rounded-full h-61.5 aspect-square mx-auto mb-6 flex items-center justify-center bg-linear-to-bl from-accent to-[#ef4444]">
+			<img
+				src="/img/about.jpg"
+				alt="Артем, Fullstack-инженер"
+				class="rounded-full aspect-square h-60"
+			/>
+		</div>
+
+		<h3 class="text-center font-bold text-xl mb-6">
+			Артем, <span class="text-accent font-mono">Fullstack</span>-инженер
+		</h3>
+
+		<ul class="text-sm text-muted-text space-y-6">
+			{
+				advantages.map((item) => (
+					<li
+						class="text-center not-first-of-type:before:block not-first-of-type:before:content-[''] not-first-of-type:before:w-2 not-first-of-type:before:h-2 not-first-of-type:before:rounded-full not-first-of-type:before:bg-accent not-first-of-type:before:mb-8 flex flex-col items-center"
+						set:html={item.text}>
+						<span class="text-text mb-2" set:html={item.title} />
+					</li>
+				))
+			}
+		</ul>
+	</Container>
+</section>
