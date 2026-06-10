@@ -1,0 +1,78 @@
+---
+import Container from "../Container.astro";
+import CustomH2 from "../ui/CustomH2.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const skills = [
+	{
+		icon: "brand-react-native",
+		title: "Frontend",
+		desc: "Отзывчивые интерфейсы с плавными анимациями и безупречным UX.",
+		tags: ["React", "Next.js", "TypeScript", "Tailwind"],
+	},
+	{
+		icon: "server-2",
+		title: "Backend",
+		desc: "Надёжные API и серверная логика с акцентом на производительность.",
+		tags: ["Node.js", "REST", "PHP", "MySQL"],
+	},
+	{
+		icon: "brand-wordpress",
+		title: "CMS",
+		desc: "Кастомные темы, плагины и гибкие структуры контента под любую задачу.",
+		tags: ["WordPress", "ACF", "MODX", "WooCommerce"],
+	},
+	{
+		icon: "cpu",
+		title: "AI / Обучение и генерация изображений",
+		desc: "Тренировка LoRA‑моделей, генерация изображений и интеграция AI в продукты.",
+		tags: ["Stable Diffusion", "Kohya", "LoRA"],
+	},
+];
+---
+
+<section class:list={["relative overflow-x-hidden", className]}>
+	<Container>
+		<CustomH2 class="mb-2">Технический стек</CustomH2>
+		<h3 class="text-center text-muted-text text-sm mb-8">
+			Инструменты и технологии, с которыми я работаю каждый день.
+		</h3>
+
+		<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+			{
+				skills.map(({ icon, title, desc, tags }) => (
+					<li class="group relative flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/3 p-5 overflow-hidden transition-colors duration-400 hover:border-white/20">
+						{/* Оранжевая полоска сверху */}
+						<span class="absolute inset-x-0 top-0 h-px bg-accent scale-0 transition-transform duration-400 delay-75 group-hover:scale-100" />
+
+						{/* Иконка */}
+						<div class="flex size-10 shrink-0 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent text-xl">
+							<Icon name={`tabler:${icon}`} class="size-5 text-accent" />
+						</div>
+
+						{/* Заголовок */}
+						<h3 class="font-mono text-sm font-bold text-text">{title}</h3>
+
+						{/* Описание */}
+						<p class="text-sm leading-relaxed text-muted-text">{desc}</p>
+
+						{/* Теги */}
+						<ul class="mt-auto flex flex-wrap gap-1.5">
+							{tags.map((tag) => (
+								<li class="font-mono text-[11px] text-muted-text bg-white/4 border border-white/10 rounded-md px-2 py-0.5">
+									{tag}
+								</li>
+							))}
+						</ul>
+					</li>
+				))
+			}
+		</ul>
+	</Container>
+</section>

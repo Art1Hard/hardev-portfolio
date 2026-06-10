@@ -31,11 +31,11 @@ const advantages: { title: string; text: string }[] = [
 		<CustomH2 class="mb-8">Обо мне</CustomH2>
 
 		<div
-			class="rounded-full h-61.5 aspect-square mx-auto mb-6 flex items-center justify-center bg-linear-to-bl from-accent to-[#ef4444]">
+			class="rounded-full h-51.5 aspect-square mx-auto mb-6 flex items-center justify-center bg-linear-to-bl from-accent to-[#ef4444]">
 			<img
 				src="/img/about.jpg"
 				alt="Артем, Fullstack-инженер"
-				class="rounded-full aspect-square h-60"
+				class="rounded-full aspect-square h-50"
 			/>
 		</div>
 
@@ -47,7 +47,7 @@ const advantages: { title: string; text: string }[] = [
 			{
 				advantages.map((item) => (
 					<li
-						class="text-center not-first-of-type:before:block not-first-of-type:before:content-[''] not-first-of-type:before:w-2 not-first-of-type:before:h-2 not-first-of-type:before:rounded-full not-first-of-type:before:bg-accent not-first-of-type:before:mb-8 flex flex-col items-center"
+						class="text-center not-first-of-type:before:block not-first-of-type:before:content-[''] not-first-of-type:before:w-2 not-first-of-type:before:h-2 not-first-of-type:before:rounded-full not-first-of-type:before:bg-accent not-first-of-type:before:mb-8 flex flex-col items-center leading-relaxed"
 						set:html={item.text}>
 						<span class="text-text mb-2" set:html={item.title} />
 					</li>

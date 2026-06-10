@@ -7,13 +7,15 @@ import mdx from "@astrojs/mdx";
 
 import sitemap from "@astrojs/sitemap";
 
+import icon from "astro-icon";
+
 // https://astro.build/config
 export default defineConfig({
-    site: "https://hardev.ru",
+	site: "https://hardev.ru",
 
-    vite: {
-        plugins: [tailwindcss()],
-    },
+	vite: {
+		plugins: [tailwindcss()],
+	},
 
-    integrations: [mdx(), sitemap()],
+	integrations: [mdx(), sitemap(), icon()],
 });

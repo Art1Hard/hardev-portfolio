@@ -1,14 +1,16 @@
 ---
-import About from "../components/home/About.astro";
+import AboutSection from "../components/home/AboutSection.astro";
 import HeroSection from "../components/home/HeroSection.astro";
+import TechSection from "../components/home/TechSection.astro";
 import TechMarquee from "../components/TechMarquee.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout description="Hello Site">
 	<main>
-		<HeroSection class="[@media(max-height:530px)]:mb-8" />
-		<TechMarquee class="mb-8" />
-		<About class="mb-16" />
+		<HeroSection class="[@media(max-height:530px)]:mb-10" />
+		<TechMarquee class="mb-10" />
+		<AboutSection class="mb-10" />
+		<TechSection class="mb-10" />
 	</main>
 </Layout>
