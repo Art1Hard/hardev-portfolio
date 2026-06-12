@@ -1,0 +1,66 @@
+---
+import Container from "../Container.astro";
+import CustomH2 from "../ui/CustomH2.astro";
+import CustomSubtitle from "../ui/CustomSubtitle.astro";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const steps: { date: string; title: string; subtitle: string; text: string }[] =
+	[
+		{
+			date: "2024 — Настоящее",
+			title: "Fullstack Developer",
+			subtitle: "Freelance & Проекты",
+			text: "Коммерческие проекты, полноценные веб-приложения от идеи до деплоя. Сотрудничество с командами и индивидуальными клиентами.",
+		},
+		{
+			date: "2023 — 2024",
+			title: "Frontend Developer",
+			subtitle: "Коммерческие проекты",
+			text: "React, Vue.js, SPA-приложения, интеграция с API, оптимизация производительности. Первые серьёзные клиентские проекты. ",
+		},
+		{
+			date: "2022 — 2023",
+			title: "Изучение Backend",
+			subtitle: "Самообразование",
+			text: "Node.js, базы данных, REST API. Создание серверных решений и понимание архитектуры приложений.",
+		},
+		{
+			date: "2021 — 2022",
+			title: "Начало пути",
+			subtitle: "Первые шаги",
+			text: "HTML, CSS, JavaScript. Вёрстка лендингов, увлечение веб-разработкой. Понимание, что код — это моё.",
+		},
+	];
+---
+
+<section class:list={["relative overflow-x-hidden", className]}>
+	<Container>
+		<CustomH2 class="mb-2">Мой путь</CustomH2>
+		<CustomSubtitle class="mb-8">
+			Каждый этап — новые знания, вызовы и&nbsp;профессиональный рост.
+		</CustomSubtitle>
+
+		<ul
+			class="space-y-4 relative pl-8 before:content-[''] before:absolute before:top-0 before:left-2 before:w-0.5 before:h-full before:bg-linear-to-b before:from-accent before:to-transparent">
+			{
+				steps.map((step) => (
+					<li class="relative text-sm rounded-2xl border border-white/10 bg-white/3 p-5 hover:border-accent/25 transition-colors duration-400 before:content-[''] before:absolute before:top-14 before:-left-7.5 before:bg-accent before:w-3 before:h-3 before:rounded-full before:border-3 before:border-background">
+						<small class="inline-block py-1 px-2 text-accent bg-accent/10 rounded-md font-bold mb-2">
+							{step.date}
+						</small>
+						<h4 class="font-mono font-bold text-base mb-2 text-bg">
+							{step.title}
+						</h4>
+						<p class="mb-2 text-accent2">{step.subtitle}</p>
+						<p class="text-muted-text leading-relaxed">{step.text}</p>
+					</li>
+				))
+			}
+		</ul>
+	</Container>
+</section>

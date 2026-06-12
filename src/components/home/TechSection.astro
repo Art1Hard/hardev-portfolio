@@ -2,6 +2,7 @@
 import Container from "../Container.astro";
 import CustomH2 from "../ui/CustomH2.astro";
 import { Icon } from "astro-icon/components";
+import CustomSubtitle from "../ui/CustomSubtitle.astro";
 
 interface Props {
 	class?: string;
@@ -40,9 +41,9 @@ const skills = [
 <section class:list={["relative overflow-x-hidden", className]}>
 	<Container>
 		<CustomH2 class="mb-2">Технический стек</CustomH2>
-		<h3 class="text-center text-muted-text text-sm mb-8">
+		<CustomSubtitle class="mb-8">
 			Инструменты и технологии, с которыми я работаю каждый день.
-		</h3>
+		</CustomSubtitle>
 
 		<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 			{
@@ -57,7 +58,7 @@ const skills = [
 						</div>
 
 						{/* Заголовок */}
-						<h3 class="font-mono text-sm font-bold text-text">{title}</h3>
+						<h4 class="font-mono text-sm font-bold text-text">{title}</h4>
 
 						{/* Описание */}
 						<p class="text-sm leading-relaxed text-muted-text">{desc}</p>
