@@ -1,0 +1,57 @@
+<form id="tg-form" class="flex flex-col gap-4 max-w-md mx-auto">
+	<input
+		type="text"
+		name="name"
+		placeholder="Ваше имя"
+		required
+		class="border p-2"
+	/>
+	<input
+		type="tel"
+		name="phone"
+		placeholder="Телефон"
+		required
+		class="border p-2"
+	/>
+	<textarea name="message" placeholder="Сообщение" class="border p-2"
+	></textarea>
+
+	<button type="submit" class="bg-blue-500 text-white p-2 rounded"
+		>Отправить</button
+	>
+	<div id="form-status" class="hidden mt-2 text-center"></div>
+</form>
+
+<script>
+	const form = document.getElementById("tg-form") as HTMLFormElement;
+	const statusDiv = document.getElementById("form-status");
+
+	form?.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		if (!statusDiv) return;
+
+		statusDiv.textContent = "Отправка...";
+		statusDiv.className = "mt-2 text-center text-gray-500";
+
+		const formData = new FormData(form);
+
+		try {
+			// Отправляем данные на наш созданный API-роут
+			const response = await fetch("/api/send-telegram", {
+				method: "POST",
+				body: formData,
+			});
+
+			if (response.ok) {
+				statusDiv.textContent = "Успешно отправлено! 🎉";
+				statusDiv.className = "mt-2 text-center text-green-600";
+				form.reset(); // Очищаем форму
+			} else {
+				throw new Error();
+			}
+		} catch (error) {
+			statusDiv.textContent = "Ошибка при отправке. Попробуйте позже.";
+			statusDiv.className = "mt-2 text-center text-red-600";
+		}
+	});
+</script>
