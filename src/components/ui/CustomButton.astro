@@ -1,10 +1,11 @@
 ---
-interface Props {
-	class?: string;
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"button"> {
 	variant?: "primary" | "secondary";
 }
 
-const { class: className, variant = "secondary" } = Astro.props;
+const { class: className, variant = "secondary", ...props } = Astro.props;
 
 const variants = {
 	primary: "bg-accent",
@@ -14,6 +15,7 @@ const variants = {
 ---
 
 <button
+	{...props}
 	class:list={[
 		"py-3 px-5 w-full rounded-xl font-bold transition-all duration-200 text-center flex items-center justify-center gap-2",
 		variants[variant],

@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"input"> {
+	classContainer?: string;
+}
+
+const { class: className, classContainer, id, ...props } = Astro.props;
+---
+
+<div class:list={classContainer}>
+	<input
+		{...props}
+		id={id}
+		class:list={[
+			"border border-white/10 bg-white/3 rounded-lg p-3 focus:outline-0 focus-visible:ring focus-visible:ring-accent/60 placeholder:text-muted-text/80 text-sm w-full ",
+			className,
+		]}
+	/>
+	<p id=`${id}-error` class="hidden text-xs pl-1 text-red-400 mt-1"></p>
+</div>

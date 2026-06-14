@@ -1,0 +1,39 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"select"> {
+	classContainer?: string;
+}
+
+const props = Astro.props;
+---
+
+<div class:list={["relative", props.classContainer]}>
+	<select
+		{...props}
+		class:list={[
+			"w-full appearance-none border border-white/10 bg-white/3 rounded-lg p-3 pr-10 text-white focus:outline-0 focus-visible:ring focus-visible:ring-accent/60 cursor-pointer text-sm",
+			props.class,
+		]}>
+		<slot />
+	</select>
+
+	{
+		/* Кастомная стрелочка, так как стандартную мы отключили через appearance-none */
+	}
+	<div
+		class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-muted-text/60">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round">
+			<path d="m6 9 6 6 6-6"></path>
+		</svg>
+	</div>
+</div>

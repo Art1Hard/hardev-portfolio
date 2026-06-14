@@ -1,0 +1,144 @@
+---
+import Container from "../Container.astro";
+import CustomButton from "../ui/CustomButton.astro";
+import CustomH2 from "../ui/CustomH2.astro";
+import CustomInput from "../ui/CustomInput.astro";
+import CustomMultipleInput from "../ui/CustomMultipleInput.astro";
+import CustomSubtitle from "../ui/CustomSubtitle.astro";
+import CustomSelect from "../ui/CustomSelect.astro";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<section class={className}>
+	<Container>
+		<CustomH2 class="mb-2">Контакты</CustomH2>
+		<CustomSubtitle class="mb-8">
+			<span>Есть идея?</span> Напишите — обсудим, как воплотить её&nbsp;в&nbsp;реальность.
+		</CustomSubtitle>
+
+		<form id="tg-form" class="flex flex-col gap-4">
+			<div id="form-status" class="hidden mt-2 text-center"></div>
+			<CustomInput type="text" name="name" id="name" placeholder="Ваше имя" />
+
+			<div class="flex flex-col-reverse gap-3">
+				<CustomInput
+					class="flex-2"
+					type="tel"
+					name="phone"
+					id="phone"
+					placeholder="Телефон"
+				/>
+
+				<label class="flex flex-col gap-1">
+					<span class="text-muted-text pl-1 text-sm">Где с Вами связаться?</span
+					>
+					<CustomSelect name="contact_method" required>
+						<option value="Telegram" class="bg-neutral-900">Telegram</option>
+						<option value="WhatsApp" class="bg-neutral-900">WhatsApp</option>
+						<option value="Звонок" class="bg-neutral-900">Обычный звонок</option
+						>
+					</CustomSelect>
+				</label>
+			</div>
+			<CustomMultipleInput name="message" placeholder="Сообщение" />
+
+			<CustomButton type="submit" id="submit-button" variant="primary"
+				>Отправить</CustomButton
+			>
+		</form>
+
+		<script>
+			import IMask from "imask";
+			import { contactFormSchema } from "../../lib/schemas/contact";
+
+			// --- Phone mask ---
+			const phoneInput = document.getElementById("phone") as HTMLInputElement;
+			if (phoneInput) {
+				IMask(phoneInput, { mask: "+{7} (000) 000-00-00" });
+			}
+
+			// --- Form status ---
+			function setStatus(el: HTMLElement, message: string) {
+				el.textContent = message;
+			}
+
+			// --- Post ---
+			async function handleSubmit(form: HTMLFormElement, btn: HTMLElement) {
+				const formData = new FormData(form);
+				const data = {
+					name: formData.get("name") as string,
+					phone: formData.get("phone") as string,
+					contactMethod: formData.get("contact_method") as string,
+					message: formData.get("message") as string,
+				};
+
+				const result = contactFormSchema.safeParse(data);
+
+				form.querySelectorAll('[id$="-error"]').forEach((el) => {
+					el.textContent = "";
+					el.classList.add("hidden");
+				});
+
+				form.querySelectorAll("input").forEach((el) => {
+					el.classList.remove("border-red-400");
+					el.classList.add("border-white/10");
+				});
+
+				if (!result.success) {
+					const fieldErrors = Object.fromEntries(
+						result.error.issues.map((issue) => [issue.path[0], issue.message]),
+					);
+
+					for (const [field, message] of Object.entries(fieldErrors)) {
+						const errorEl = document.getElementById(
+							`${field}-error`,
+						) as HTMLParagraphElement | null;
+						if (errorEl) {
+							errorEl.textContent = message;
+							errorEl.classList.remove("hidden");
+						}
+
+						const inputEl = document.getElementById(
+							field,
+						) as HTMLInputElement | null;
+						inputEl?.classList.add("border-red-400");
+						inputEl?.classList.remove("border-white/10");
+					}
+					return;
+				}
+
+				try {
+					setStatus(btn, "Отправляем...");
+					const response = await fetch("/api/send-telegram", {
+						method: "POST",
+						body: formData,
+					});
+
+					if (!response.ok) throw new Error();
+
+					setStatus(btn, "Успешно отправлено!");
+					form.reset();
+				} catch {
+					setStatus(btn, "Возникла ошибка");
+				}
+			}
+
+			// --- Init ---
+			const form = document.getElementById("tg-form") as HTMLFormElement;
+			const submitBtn = document.getElementById(
+				"submit-button",
+			) as HTMLButtonElement | null;
+
+			form?.addEventListener("submit", (e) => {
+				e.preventDefault();
+
+				if (submitBtn) handleSubmit(form, submitBtn);
+			});
+		</script>
+	</Container>
+</section>
