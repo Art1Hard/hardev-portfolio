@@ -2,6 +2,7 @@
 import Image from "astro/components/Image.astro";
 import Container from "../Container.astro";
 import CustomH2 from "../ui/CustomH2.astro";
+import aboutPhoto from "../../assets/img/about.jpg";
 
 interface Props {
 	class?: string;
@@ -34,11 +35,11 @@ const advantages: { title: string; text: string }[] = [
 		<div
 			class="rounded-full h-51.5 aspect-square mx-auto mb-6 flex items-center justify-center bg-linear-to-bl from-accent to-[#ef4444]">
 			<Image
-				src="/img/about.jpg"
+				src={aboutPhoto}
 				alt="Артем, Fullstack-инженер"
 				class="rounded-full h-50 w-50"
-				width={800}
-				height={800}
+				width={640}
+				height={640}
 			/>
 		</div>
 
