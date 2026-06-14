@@ -2,7 +2,8 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { ZodError } from "astro/zod";
-import { contactFormSchema } from "../../lib/schemas/contact";
+
+import { contactFormSchema } from "@/lib/schemas/contact";
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
