@@ -1,4 +1,5 @@
 ---
+import Image from "astro/components/Image.astro";
 import Container from "../Container.astro";
 import CustomH2 from "../ui/CustomH2.astro";
 
@@ -32,10 +33,12 @@ const advantages: { title: string; text: string }[] = [
 
 		<div
 			class="rounded-full h-51.5 aspect-square mx-auto mb-6 flex items-center justify-center bg-linear-to-bl from-accent to-[#ef4444]">
-			<img
+			<Image
 				src="/img/about.jpg"
 				alt="Артем, Fullstack-инженер"
-				class="rounded-full aspect-square h-50"
+				class="rounded-full h-50 w-50"
+				width={800}
+				height={800}
 			/>
 		</div>
 
